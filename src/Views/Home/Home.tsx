@@ -1,6 +1,6 @@
-import BackgroundHome from "../../Components/backgroundHome";
-
 import { Link } from "react-router-dom";
+
+import BackgroundHome from "../../Components/backgroundHome";
 import {
   Button,
   Container,

@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
-
 import BackgroundHome from "../../Components/backgroundHome";
+
+import { Link } from "react-router-dom";
 import {
   Button,
   Container,
   Content,
   Credits,
-  Message,
   Options,
   Title,
 } from "./Styles/Index";
@@ -18,16 +17,16 @@ const Home = () => {
       <Content>
         <Container>
           <Title>Apolo</Title>
-          <Message>
-            <p>Compartilhe sua vibração</p>
-            <p>Viva a emoção</p>
-          </Message>
-          <Link to={"/SignIn"}>
-            <Button>SignIn</Button>
-          </Link>
-          <Link to={"/SignUp"}>
-            <Button>SignUp</Button>
-          </Link>
+          <Button>
+            <Link to={"/SignIn"}>
+              <p>SignIn</p>{" "}
+            </Link>
+          </Button>
+          <Button>
+            <Link to={"/SignUp"}>
+              <p>SignUp</p>
+            </Link>
+          </Button>
         </Container>
         <Options>
           <p>A</p>

@@ -1,11 +1,26 @@
+import axios from "axios";
 import authValidation from "../services/validations/authValidation";
 
 class AuthRepository {
   authValidation = new authValidation();
 
   async login(email: string, password: string) {
-    const data = await this.authValidation.validateLogin({ email, password });
-    return data;
+    try {
+      await this.authValidation.validateLogin({ email, password });
+      await axios
+        .post("https://apolo-api.onrender.com/auth/signin", {
+          email,
+          password,
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error:", error);
+        throw error;
+      }
+    }
   }
 
   async register(
@@ -16,15 +31,33 @@ class AuthRepository {
     password: string,
     confirmPassword: string
   ) {
-    const data = await this.authValidation.validateRegister({
-      name,
-      surname,
-      email,
-      phone,
-      password,
-      confirmPassword,
-    });
-    return data;
+    try {
+      await this.authValidation.validateRegister({
+        name,
+        surname,
+        email,
+        phone,
+        password,
+        confirmPassword,
+      });
+      await axios
+        .post("https://apolo-api.onrender.com/auth/signup", {
+          name,
+          surname,
+          email,
+          phone,
+          password,
+          confirmPassword,
+        })
+        .then((response) => {
+          console.log(response.data);
+        });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error:", error);
+        throw error;
+      }
+    }
   }
 }
 

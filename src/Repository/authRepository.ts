@@ -7,14 +7,15 @@ class AuthRepository {
   async login(email: string, password: string) {
     try {
       await this.authValidation.validateLogin({ email, password });
-      await axios
-        .post("https://apolo-api.onrender.com/auth/signin", {
+      const data = await axios.post(
+        "https://apolo-api.onrender.com/auth/signin",
+        {
           email,
           password,
-        })
-        .then((response) => {
-          console.log(response.data);
-        });
+        }
+      );
+
+      return data;
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error:", error);
@@ -40,18 +41,19 @@ class AuthRepository {
         password,
         confirmPassword,
       });
-      await axios
-        .post("https://apolo-api.onrender.com/auth/signup", {
+      const data = await axios.post(
+        "https://apolo-api.onrender.com/auth/signup",
+        {
           name,
           surname,
           email,
           phone,
           password,
           confirmPassword,
-        })
-        .then((response) => {
-          console.log(response.data);
-        });
+        }
+      );
+
+      return data;
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error:", error);

@@ -8,8 +8,6 @@ interface ProtectedRouteProps {
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   const { state } = useAuth();
 
-  console.log(state);
-
   if (!state.isLoggedIn) {
     return <Navigate to="/welcome" replace />;
   }

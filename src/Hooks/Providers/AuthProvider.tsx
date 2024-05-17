@@ -61,7 +61,6 @@ export const AuthProvider = ({ children }: ProviderProps) => {
   useEffect(() => {
     const storedUser = Cookies.get("user");
     const storedIsLoggedIn = Cookies.get("isLoggedIn");
-    console.log(storedUser, storedIsLoggedIn);
 
     if (storedUser && storedIsLoggedIn) {
       const parsedUser = JSON.parse(storedUser);

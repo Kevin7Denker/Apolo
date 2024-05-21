@@ -18,11 +18,16 @@ import {
   InputContent,
 } from "./Styles/Index";
 import { InputContainer } from "../Welcome/Styles/Index";
+import CountryDropdown from "../../Components/dropDownCountries";
 
 const SignUp = () => {
   const profile = UserProfile();
 
   console.log(profile);
+  function handleCountryChange(): void {
+    throw new Error("Function not implemented.");
+  }
+
   return (
     <>
       <BackgroundHome />
@@ -37,21 +42,11 @@ const SignUp = () => {
           <Form>
             <InputContent>
               <InputContainer>
-                <Input
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  required
-                />
+                <Input type="text" placeholder="Name" required />
                 <Label>Name</Label>
               </InputContainer>
               <InputContainer>
-                <Input
-                  type="password"
-                  autoComplete="current-password"
-                  placeholder="Password"
-                  required
-                />
+                <Input type="text" placeholder="Surname" required />
                 <Label>Surname</Label>
               </InputContainer>
             </InputContent>
@@ -63,24 +58,29 @@ const SignUp = () => {
                   autoComplete="email"
                   required
                 />
-                <Label>Phone</Label>
+                <Label>Email</Label>
               </InputContainer>
               <InputContainer>
-                <Input
-                  type="password"
-                  autoComplete="current-password"
-                  placeholder="Password"
-                  required
-                />
-                <Label>Nationality</Label>
+                <Input type="tel" placeholder="Phone" required />
+                <Label>Phone</Label>
               </InputContainer>
             </InputContent>
             <InputContent>
               <InputContainer>
+                <CountryDropdown
+                  label="Select your country"
+                  name="country"
+                  onChange={handleCountryChange}
+                />
+              </InputContainer>
+              <InputContainer />
+            </InputContent>
+            <InputContent>
+              <InputContainer>
                 <Input
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
+                  type="password"
+                  placeholder="Password"
+                  autoComplete="current-password"
                   required
                 />
                 <Label>Password</Label>

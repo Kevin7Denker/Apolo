@@ -16,6 +16,7 @@ import {
   Input,
   Label,
   InputContent,
+  ContainerDropdown,
 } from "./Styles/Index";
 import { InputContainer } from "../Welcome/Styles/Index";
 import CountryDropdown from "../../Components/dropDownCountries";
@@ -66,13 +67,13 @@ const SignUp = () => {
               </InputContainer>
             </InputContent>
             <InputContent>
-              <InputContainer>
+              <ContainerDropdown>
                 <CountryDropdown
                   label="Select your country"
                   name="country"
                   onChange={handleCountryChange}
                 />
-              </InputContainer>
+              </ContainerDropdown>
               <InputContainer />
             </InputContent>
             <InputContent>
@@ -99,7 +100,7 @@ const SignUp = () => {
           </Form>
 
           <RegisterContainer>
-            <MainRegisterText>Already have an account?</MainRegisterText>
+            <MainRegisterText>Already have an account ?</MainRegisterText>
             <SubRegisterText>
               <Link to="/welcome">
                 <SubText>Sign In!</SubText>

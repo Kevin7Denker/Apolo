@@ -11,7 +11,7 @@ export const Content = styled.div`
 
 export const Container = styled.div`
   width: 30svw;
-  height: 65svh;
+
   justify-content: center;
   background-color: rgb(0, 0, 0);
   border-radius: 10px;
@@ -19,6 +19,10 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 3rem;
   gap: 2rem;
+`;
+
+export const ContainerDropdown = styled.div`
+  max-width: 50%;
 `;
 
 export const IntroTexts = styled.div`
@@ -65,6 +69,7 @@ export const InputContainer = styled.div`
   position: relative;
   padding: 1.2rem 0 0;
   width: 80%;
+
   display: flex;
   align-items: center;
 `;

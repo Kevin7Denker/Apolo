@@ -10,14 +10,14 @@ export const Content = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 35svw;
-  height: 70svh;
+  width: 30svw;
+  height: 65svh;
   justify-content: center;
   background-color: rgb(0, 0, 0);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 3rem;
   gap: 2rem;
 `;
 
@@ -66,6 +66,7 @@ export const InputContainer = styled.div`
   padding: 1.2rem 0 0;
   width: 80%;
   display: flex;
+  align-items: center;
 `;
 
 export const Input = styled.input`

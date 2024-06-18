@@ -29,12 +29,26 @@ export const Container = styled.div`
     backdrop-filter: blur(10px);
     background-color: transparent;
   }
+
+  @media (width > 650px) and (width <= 900px) {
+    align-items: center;
+    gap: 1.5rem;
+    width: 100svw;
+    backdrop-filter: blur(10px);
+    background-color: transparent;
+  }
 `;
 
 export const MainTexts = styled.div`
   width: 100%;
 
   @media (width <= 650px) {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media (width > 650px) and (width <= 900px) {
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -118,6 +132,17 @@ export const Form = styled.form`
     flex-direction: column;
     background-color: black;
   }
+
+  @media (width > 650px) and (width <= 900px) {
+    align-items: center;
+    width: 80svw;
+    height: 50svh;
+    justify-content: center;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+  }
 `;
 
 export const Label = styled.label`
@@ -151,6 +176,11 @@ export const Button = styled.button`
   @media (width <= 650px) {
     width: 45%;
   }
+
+  @media (width > 650px) and (width <= 900px) {
+    width: 45%;
+    padding: 1rem;
+  }
 `;
 
 export const Options = styled.div`
@@ -181,6 +211,15 @@ export const Options = styled.div`
       font-size: 1rem;
     }
   }
+
+  @media (width > 650px) and (width <= 900px) {
+    margin: 2rem 2rem;
+    padding: 1rem;
+
+    p {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 export const Credits = styled.div`
@@ -195,10 +234,25 @@ export const Credits = styled.div`
   p {
     color: white;
     text-align: justify;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   @media (width <= 650px) {
+    padding: 0;
+    width: 90%;
+    right: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin: 0 0 1rem;
+
+    p {
+      font-size: calc(0.5rem + 1vw);
+      text-align: center;
+    }
+  }
+
+  @media (width > 650px) and (width <= 900px) {
     padding: 0;
     width: 90%;
     right: auto;
@@ -236,6 +290,13 @@ export const RegisterContainer = styled.div`
     display: flex;
     justify-content: center;
   }
+
+  @media (width > 650px) and (width <= 900px) {
+    margin: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 `;
 
 export const MainRegisterText = styled.p`
@@ -243,6 +304,10 @@ export const MainRegisterText = styled.p`
 
   @media (width <= 650px) {
     font-size: 0.8rem;
+  }
+
+  @media (width > 650px) and (width <= 900px) {
+    font-size: 1rem;
   }
 `;
 
@@ -252,6 +317,10 @@ export const SubRegisterText = styled.div`
 
   @media (width <= 650px) {
     font-size: 0.8rem;
+  }
+
+  @media (width > 650px) and (width <= 900px) {
+    font-size: 1rem;
   }
 `;
 

@@ -10,8 +10,7 @@ export const Content = styled.div`
 `;
 
 export const Container = styled.div`
-  width: 30svw;
-
+  width: 45svw;
   justify-content: center;
   background-color: rgb(0, 0, 0);
   border-radius: 10px;
@@ -19,6 +18,19 @@ export const Container = styled.div`
   flex-direction: column;
   padding: 3rem;
   gap: 2rem;
+
+  @media (width <= 650px) {
+    width: 100svw;
+    height: auto;
+    padding: 0.5rem 0 1rem 0;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (width > 650px) and (width <= 900px) {
+    width: 80svw;
+  }
 `;
 
 export const ContainerDropdown = styled.div`
@@ -29,17 +41,30 @@ export const IntroTexts = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  @media (width <= 650px) {
+    font-size: 1rem;
+  }
 `;
 
 export const IntroTitle = styled.h1`
   font-weight: 500;
   font-size: 2rem;
+
+  @media (width <= 650px) {
+    font-size: 1.5rem;
+    margin: 1rem 0 0 1rem;
+  }
 `;
 
 export const IntroSubtitle = styled.h2`
   font-weight: 500;
   font-size: 1rem;
   color: silver;
+
+  @media (width <= 650px) {
+    margin: 0 0 0 1rem;
+  }
 `;
 
 export const Form = styled.form`
@@ -50,8 +75,9 @@ export const Form = styled.form`
 
   @media (width <= 650px) {
     align-items: center;
-    width: 100svw;
-    padding: 2rem;
+    width: 100%;
+    padding: 1rem;
+
     display: flex;
     flex-direction: column;
     background-color: black;
@@ -63,6 +89,10 @@ export const InputContent = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
+
+  @media (width <= 650px) {
+    width: 100%;
+  }
 `;
 
 export const InputContainer = styled.div`
@@ -118,6 +148,10 @@ export const Input = styled.input`
   &:invalid {
     box-shadow: none;
   }
+
+  @media (width <= 650px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const Label = styled.label`
@@ -128,16 +162,29 @@ export const Label = styled.label`
   font-size: var(1.2rem + 1vw);
   color: white;
   pointer-events: none;
+
+  @media (width <= 650px) {
+    font-size: 0.8rem;
+  }
 `;
 
 export const Submit = styled.button`
-  width: 30%;
-  padding: 1rem;
+  width: 20%;
+  padding: 0.8rem;
   margin-top: 2rem;
   border-radius: 5px;
   background-color: var(--primary-color);
   border: none;
   font-size: 1rem;
+  cursor: pointer;
+
+  @media (width <= 650px) {
+    width: 100%;
+  }
+
+  @media (width > 650px) and (width <= 900px) {
+    width: 100%;
+  }
 `;
 
 export const RegisterContainer = styled.div`

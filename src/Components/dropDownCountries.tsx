@@ -29,6 +29,7 @@ const DropdownSelect = styled.select`
   background-position: right 10px center;
   background-size: 10px;
   border-radius: 4px;
+  cursor: pointer;
 `;
 
 const CountryDropdown = ({

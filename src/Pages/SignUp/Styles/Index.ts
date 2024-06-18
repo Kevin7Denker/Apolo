@@ -34,7 +34,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerDropdown = styled.div`
-  max-width: 50%;
+  width: 80%;
 `;
 
 export const IntroTexts = styled.div`

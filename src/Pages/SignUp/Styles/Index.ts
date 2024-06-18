@@ -111,7 +111,7 @@ export const Input = styled.input`
   border-bottom: 1px solid white;
   outline: 0;
 
-  font-size: var(1.2rem + 1vw);
+  font-size: 0.8rem;
   color: #fff;
   padding: 7px 0;
   background: transparent;
@@ -122,7 +122,7 @@ export const Input = styled.input`
   }
 
   &:placeholder-shown ~ label {
-    font-size: var(1.2rem + 1vw);
+    font-size: 1rem;
     cursor: text;
     top: 20px;
   }
@@ -140,7 +140,7 @@ export const Input = styled.input`
 
   &:focus ~ label {
     top: 0;
-    font-size: var(1.2rem + 1vw);
+    font-size: 1rem;
     color: var(--primary-color-dark);
   }
 
@@ -159,7 +159,7 @@ export const Label = styled.label`
   top: 0;
   display: block;
   transition: 0.2s;
-  font-size: var(1.2rem + 1vw);
+  font-size: 1rem;
   color: white;
   pointer-events: none;
 
@@ -169,7 +169,7 @@ export const Label = styled.label`
 `;
 
 export const Submit = styled.button`
-  width: 20%;
+  width: 30%;
   padding: 0.8rem;
   margin-top: 2rem;
   border-radius: 5px;

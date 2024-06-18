@@ -177,6 +177,12 @@ export const Submit = styled.button`
   border: none;
   font-size: 1rem;
   cursor: pointer;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: var(--primary-color-dark);
+    transition: 0.5s;
+  }
 
   @media (width <= 650px) {
     width: 100%;

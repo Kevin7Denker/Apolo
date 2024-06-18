@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BackgroundHome from "../../Components/backgroundHome";
-import UserProfile from "../../Utils/UserProfile";
+
 import {
   Container,
   Content,
@@ -20,13 +20,52 @@ import {
 } from "./Styles/Index";
 import { InputContainer } from "../Welcome/Styles/Index";
 import CountryDropdown from "../../Components/dropDownCountries";
+import AuthRepository from "../../Repository/authRepository";
+import { useState } from "react";
 
 const SignUp = () => {
-  const profile = UserProfile();
+  const navigate = useNavigate();
+  const authrepository = new AuthRepository();
 
-  console.log(profile);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [country, setCountry] = useState("" as string);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    try {
+      const res = await authrepository.register(
+        name,
+        surname,
+        email,
+        phone,
+        password,
+        confirmPassword
+      );
+
+      if (res) {
+        alert("User created successfully!");
+
+        setName("");
+        setSurname("");
+        setPhone("");
+        setEmail("");
+        setPassword("");
+        setConfirmPassword("");
+
+        navigate("/welcome");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   function handleCountryChange(): void {
-    throw new Error("Function not implemented.");
+    setCountry(country);
   }
 
   return (
@@ -40,14 +79,26 @@ const SignUp = () => {
               Enter your details below to create your account and get started.
             </IntroSubtitle>
           </IntroTexts>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <InputContent>
               <InputContainer>
-                <Input type="text" placeholder="Name" required />
+                <Input
+                  type="text"
+                  placeholder="Name"
+                  required
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
                 <Label>Name</Label>
               </InputContainer>
               <InputContainer>
-                <Input type="text" placeholder="Surname" required />
+                <Input
+                  type="text"
+                  placeholder="Surname"
+                  required
+                  value={surname}
+                  onChange={(e) => setSurname(e.target.value)}
+                />
                 <Label>Surname</Label>
               </InputContainer>
             </InputContent>
@@ -58,11 +109,19 @@ const SignUp = () => {
                   placeholder="Email"
                   autoComplete="email"
                   required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <Label>Email</Label>
               </InputContainer>
               <InputContainer>
-                <Input type="tel" placeholder="Phone" required />
+                <Input
+                  type="tel"
+                  placeholder="Phone"
+                  required
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                />
                 <Label>Phone</Label>
               </InputContainer>
             </InputContent>
@@ -83,6 +142,8 @@ const SignUp = () => {
                   placeholder="Password"
                   autoComplete="current-password"
                   required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <Label>Password</Label>
               </InputContainer>
@@ -92,6 +153,8 @@ const SignUp = () => {
                   autoComplete="current-password"
                   placeholder="Password"
                   required
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
                 />
                 <Label>Confirm Password</Label>
               </InputContainer>

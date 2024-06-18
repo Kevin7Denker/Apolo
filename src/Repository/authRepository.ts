@@ -41,19 +41,16 @@ class AuthRepository {
         password,
         confirmPassword,
       });
-      const data = await axios.post(
-        "https://apolo-api.onrender.com/auth/signup",
-        {
-          name,
-          surname,
-          email,
-          phone,
-          password,
-          confirmPassword,
-        }
-      );
+      await axios.post("https://apolo-api.onrender.com/auth/signup", {
+        name,
+        surname,
+        email,
+        phone,
+        password,
+        confirmPassword,
+      });
 
-      return data;
+      return true;
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error:", error);

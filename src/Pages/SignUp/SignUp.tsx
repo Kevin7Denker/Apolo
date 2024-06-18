@@ -165,7 +165,7 @@ const SignUp = () => {
           <RegisterContainer>
             <MainRegisterText>Already have an account ?</MainRegisterText>
             <SubRegisterText>
-              <Link to="/welcome">
+              <Link to="/">
                 <SubText>Sign In!</SubText>
               </Link>
             </SubRegisterText>

@@ -9,10 +9,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   const { state } = useAuth();
   const { isLoggedIn } = state;
 
-  const allowedRoutes = ["/welcome", "/signup"];
+  const allowedRoutes = ["/", "/signup"];
 
   if (!isLoggedIn && !allowedRoutes.includes(window.location.pathname)) {
-    return <Navigate to="/welcome" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return element;

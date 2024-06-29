@@ -44,7 +44,8 @@ const SignUp = () => {
         email,
         phone,
         password,
-        confirmPassword
+        confirmPassword,
+        country
       );
 
       if (res) {
@@ -56,16 +57,13 @@ const SignUp = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
+        setCountry("");
 
         navigate("/welcome");
       }
     } catch (error) {
       console.error(error);
     }
-  }
-
-  function handleCountryChange(): void {
-    setCountry(country);
   }
 
   return (
@@ -130,7 +128,7 @@ const SignUp = () => {
                 <CountryDropdown
                   label="Select your country"
                   name="country"
-                  onChange={handleCountryChange}
+                  onChange={(e) => setCountry(e.target.value)}
                 />
               </ContainerDropdown>
               <InputContainer />

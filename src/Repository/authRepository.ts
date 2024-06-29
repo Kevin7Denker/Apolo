@@ -30,7 +30,8 @@ class AuthRepository {
     email: string,
     phone: string,
     password: string,
-    confirmPassword: string
+    confirmPassword: string,
+    nationality: string
   ) {
     try {
       await this.authValidation.validateRegister({
@@ -40,6 +41,7 @@ class AuthRepository {
         phone,
         password,
         confirmPassword,
+        nationality,
       });
       await axios.post("https://apolo-api.onrender.com/auth/signup", {
         name,
@@ -48,6 +50,7 @@ class AuthRepository {
         phone,
         password,
         confirmPassword,
+        nationality,
       });
 
       return true;

@@ -27,14 +27,16 @@ class AuthValidation {
     phone: string;
     password: string;
     confirmPassword: string;
+    nationality: string;
   }) {
     const schema = z.object({
       name: z.string(),
       surname: z.string(),
       email: z.string().email(),
-      phone: z.string().min(10),
+      phone: z.string(),
       password: z.string().min(6),
       confirmPassword: z.string(),
+      nationality: z.string(),
     });
 
     try {

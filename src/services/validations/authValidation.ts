@@ -27,7 +27,6 @@ class AuthValidation {
     phone: string;
     password: string;
     confirmPassword: string;
-    nationality: string;
   }) {
     const schema = z.object({
       name: z.string(),

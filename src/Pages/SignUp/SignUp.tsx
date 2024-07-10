@@ -16,10 +16,8 @@ import {
   Input,
   Label,
   InputContent,
-  ContainerDropdown,
 } from "./Styles/Index";
-import { InputContainer } from "../Welcome/Styles/Index";
-import CountryDropdown from "../../Components/dropDownCountries";
+import { InputContainer } from "../SignIn/Styles/Index";
 import AuthRepository from "../../Repository/authRepository";
 import { useState } from "react";
 
@@ -33,7 +31,6 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [country, setCountry] = useState("" as string);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -44,9 +41,10 @@ const SignUp = () => {
         email,
         phone,
         password,
-        confirmPassword,
-        country
+        confirmPassword
       );
+
+      console.log(res);
 
       if (res) {
         alert("User created successfully!");
@@ -57,7 +55,6 @@ const SignUp = () => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
-        setCountry("");
 
         navigate("/welcome");
       }
@@ -123,16 +120,7 @@ const SignUp = () => {
                 <Label>Phone</Label>
               </InputContainer>
             </InputContent>
-            <InputContent>
-              <ContainerDropdown>
-                <CountryDropdown
-                  label="Select your country"
-                  name="country"
-                  onChange={(e) => setCountry(e.target.value)}
-                />
-              </ContainerDropdown>
-              <InputContainer />
-            </InputContent>
+
             <InputContent>
               <InputContainer>
                 <Input

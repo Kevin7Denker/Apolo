@@ -32,9 +32,10 @@ class AuthValidation {
       name: z.string(),
       surname: z.string(),
       email: z.string().email(),
-      phone: z.string().min(10),
+      phone: z.string(),
       password: z.string().min(6),
       confirmPassword: z.string(),
+      nationality: z.string(),
     });
 
     try {

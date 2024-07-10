@@ -1,17 +1,26 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../Views/Home/Home";
-import Error from "../Views/Error/Error";
-import SignIn from "../Views/SignIn/SignIn";
-import Soon from "../Views/Soon/Soon";
+import SignIn from "../Pages/SignIn/SignIn";
+import Error from "../Pages/Error/Error";
+import SignUp from "../Pages/SignUp/SignUp";
+import ProtectedRoute from "../Hooks/Contexts/ProtectedRoute";
+import Home from "../Pages/Home/Home";
+import Welcome from "../Pages/Welcome/Welcome";
 
 export default function RoutesApp() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<Error />} />
-        <Route path="/" element={<Soon />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/signIn" element={<SignIn />} />
+        <Route path="/" element={<ProtectedRoute element={<SignIn />} />} />
+        <Route
+          path="/signup"
+          element={<ProtectedRoute element={<SignUp />} />}
+        />
+        <Route
+          path="/welcome"
+          element={<ProtectedRoute element={<Welcome />} />}
+        />
+        <Route path="/home" element={<ProtectedRoute element={<Home />} />} />
       </Routes>
     </BrowserRouter>
   );

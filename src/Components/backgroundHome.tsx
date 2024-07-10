@@ -10,6 +10,7 @@ const VideoBackground = styled.video`
   left: 0;
   z-index: -1;
   object-fit: cover;
+  filter: blur(10px);
 `;
 
 const BackgroundHome = () => {

@@ -36,7 +36,7 @@ interface ProviderProps {
 
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-const authReducer = (state: State, action: Action) => {
+const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "LOGIN":
       return {
@@ -62,14 +62,12 @@ export const AuthProvider = ({ children }: ProviderProps) => {
     const storedUser = Cookies.get("user");
     const storedIsLoggedIn = Cookies.get("isLoggedIn");
 
-    if (storedUser && storedIsLoggedIn) {
+    if (storedUser && storedIsLoggedIn === "true") {
       const parsedUser = JSON.parse(storedUser);
-      if (parsedUser !== null) {
-        dispatch({
-          type: "LOGIN",
-          payload: parsedUser,
-        });
-      }
+      dispatch({
+        type: "LOGIN",
+        payload: parsedUser,
+      });
     }
   }, []);
 

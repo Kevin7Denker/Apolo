@@ -56,7 +56,7 @@ const SignUp = () => {
         setPassword("");
         setConfirmPassword("");
 
-        navigate("/welcome");
+        navigate("/");
       }
     } catch (error) {
       console.error(error);

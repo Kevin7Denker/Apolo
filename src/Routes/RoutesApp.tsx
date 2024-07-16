@@ -11,11 +11,8 @@ export default function RoutesApp() {
     <BrowserRouter>
       <Routes>
         <Route path="*" element={<Error />} />
-        <Route path="/" element={<ProtectedRoute element={<SignIn />} />} />
-        <Route
-          path="/signup"
-          element={<ProtectedRoute element={<SignUp />} />}
-        />
+        <Route path="/" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route
           path="/welcome"
           element={<ProtectedRoute element={<Welcome />} />}

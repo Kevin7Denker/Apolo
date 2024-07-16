@@ -1,7 +1,10 @@
+import React from "react";
 import RoutesApp from "./Routes/RoutesApp";
 
-function App() {
-  return <RoutesApp />;
+class App extends React.Component {
+  render() {
+    return <RoutesApp />;
+  }
 }
 
 export default App;

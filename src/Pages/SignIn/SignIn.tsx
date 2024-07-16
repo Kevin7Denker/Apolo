@@ -21,8 +21,9 @@ import {
 } from "./Styles/Index";
 import { Link, useNavigate } from "react-router-dom";
 import AuthRepository from "../../Repository/authRepository";
-import { useAuth } from "../../Hooks/Providers/AuthProvider";
+
 import { handleResponse } from "../../Utils/Auth/SignInUtils";
+import { useAuth } from "../../Hooks/useAuth";
 
 const SignIn = () => {
   const authrepository = new AuthRepository();

@@ -1,21 +1,56 @@
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../Providers/AuthProvider";
+import React, { useEffect, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuth } from "../useAuth";
+import Welcome from "../../Pages/Welcome/Welcome";
 
 interface ProtectedRouteProps {
   element: React.ReactElement;
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const { state } = useAuth();
-  const { isLoggedIn } = state;
+  const location = useLocation();
 
-  const allowedRoutes = ["/", "/signup"];
+  const { state: authState } = useAuth();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [shouldRedirect, setShouldRedirect] = useState<boolean>(false);
+  const [newUser, setNewUser] = useState<boolean>(false);
 
-  if (!isLoggedIn && !allowedRoutes.includes(window.location.pathname)) {
-    return <Navigate to="/" replace />;
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const isLoggedIn = authState.isLoggedIn;
+
+      if (authState.user && authState.user.profile.dateCreation == null) {
+        setNewUser(true);
+      }
+
+      if (isLoggedIn === false && location.pathname !== "/") {
+        setShouldRedirect(true);
+      } else {
+        setShouldRedirect(false);
+      }
+    }
+  }, [authState, isLoading, location]);
+
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  } else if (shouldRedirect) {
+    return <Navigate to="/" />;
+  } else if (newUser) {
+    const newPathname = "/welcome";
+    window.history.pushState({}, "", newPathname);
+    element = <Welcome />;
+    return element;
+  } else {
+    return element;
   }
-
-  return element;
 };
 
 export default ProtectedRoute;

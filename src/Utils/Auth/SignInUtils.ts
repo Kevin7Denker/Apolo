@@ -26,10 +26,6 @@ export const handleResponse = (
 
     dispatch({ type: "LOGIN", payload: user });
 
-    if (user.profile.dateCreation == null) {
-      navigate("/welcome");
-    } else {
-      navigate("/dashboard");
-    }
+    navigate("/home");
   }
 };

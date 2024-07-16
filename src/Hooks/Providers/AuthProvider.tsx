@@ -2,16 +2,14 @@
 import {
   createContext,
   useReducer,
-  useContext,
   ReactNode,
   Dispatch,
   useEffect,
 } from "react";
-
 import Cookies from "js-cookie";
 
 interface State {
-  user: null | any;
+  user: any;
   isLoggedIn: boolean;
 }
 
@@ -34,7 +32,9 @@ interface ProviderProps {
   children?: ReactNode;
 }
 
-const AuthContext = createContext<AuthContextProps | undefined>(undefined);
+export const AuthContext = createContext<AuthContextProps | undefined>(
+  undefined
+);
 
 const authReducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -76,12 +76,4 @@ export const AuthProvider = ({ children }: ProviderProps) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
 };

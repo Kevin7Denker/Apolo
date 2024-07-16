@@ -8,7 +8,7 @@ class AuthValidation {
         password: z.string().min(6),
       });
 
-      return console.log(schema.parse(data));
+      return schema.parse(data);
     } catch (error) {
       if (error instanceof ZodError) {
         const errorMessages = error.errors.map((err) => err.message);

@@ -7,26 +7,35 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
-  const state = useAuth();
+  const { state: authState } = useAuth();
   const location = useLocation();
-  const [shouldRedirect, setShouldRedirect] = useState<boolean>(false); // Inicializado como false
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [shouldRedirect, setShouldRedirect] = useState<boolean>(false);
 
   useEffect(() => {
-    const isLoggedIn = state;
+    const timeout = setTimeout(() => {
+      setIsLoading(false);
+    }, 2000);
 
-    if (isLoggedIn && location.pathname === "/") {
-      setShouldRedirect(true);
-    } else if (
-      !isLoggedIn &&
-      location.pathname !== "/" &&
-      location.pathname !== "/signup"
-    ) {
-      setShouldRedirect(false);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const isLoggedIn = authState.isLoggedIn;
+
+      if (isLoggedIn === false && location.pathname !== "/") {
+        setShouldRedirect(true);
+      } else {
+        setShouldRedirect(false);
+      }
     }
-  }, [state, location]);
+  }, [authState, isLoading, location]);
 
-  if (shouldRedirect) {
-    return <Navigate to="/home" replace />;
+  if (isLoading) {
+    return <div>Carregando...</div>;
+  } else if (shouldRedirect) {
+    return <Navigate to="/" replace />;
   } else {
     return element;
   }

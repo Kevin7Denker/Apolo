@@ -13,11 +13,11 @@ const Welcome = () => {
   };
 
   const handleNext = () => {
-    setModalStep(2);
+    setModalStep((prevStep) => prevStep + 1);
   };
 
   const handleBack = () => {
-    setModalStep(1);
+    setModalStep((prevStep) => prevStep - 1);
   };
 
   const handleSubmit = () => {
@@ -33,6 +33,14 @@ const Welcome = () => {
       <Content>
         <Modal>
           {modalStep === 1 && (
+            <>
+              <h1>Hey👋</h1>
+              <h2>Welcome to Apolo!</h2>
+              <Submit onClick={handleNext}>Next</Submit>
+            </>
+          )}
+
+          {modalStep === 2 && (
             <>
               <h2>Select a Country</h2>
               <ListStyle>
@@ -51,7 +59,7 @@ const Welcome = () => {
             </>
           )}
 
-          {modalStep === 2 && (
+          {modalStep === 3 && (
             <div>
               <h2>Input Details</h2>
               <input
@@ -59,6 +67,25 @@ const Welcome = () => {
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
               />
+              <button onClick={handleBack}>Back</button>
+              <button onClick={handleNext}>Next</button>
+            </div>
+          )}
+
+          {modalStep === 4 && (
+            <div>
+              <h2>Review Information</h2>
+              <p>Selected Country: {selectedItem}</p>
+              <p>Input Value: {inputValue}</p>
+              <button onClick={handleBack}>Back</button>
+              <button onClick={handleNext}>Next</button>
+            </div>
+          )}
+
+          {modalStep === 5 && (
+            <div>
+              <h2>Submit</h2>
+              <p>Are you ready to submit the information?</p>
               <button onClick={handleBack}>Back</button>
               <button onClick={handleSubmit}>Submit</button>
             </div>

@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { countries } from "../../Utils/Data/Countries";
 import BackgroundHome from "../../Components/backgroundHome";
-import { Content, ListStyle, Modal, Submit } from "./Styles/Index";
+import {
+  Content,
+  ModalContent,
+  ListStyle,
+  Modal,
+  Submit,
+  Subtitle,
+  Title,
+  Text,
+} from "./Styles/Index";
 
 const Welcome = () => {
   const [modalStep, setModalStep] = useState(1);
@@ -33,15 +42,23 @@ const Welcome = () => {
       <Content>
         <Modal>
           {modalStep === 1 && (
-            <>
-              <h1>Hey👋</h1>
-              <h2>Welcome to Apolo!</h2>
+            <ModalContent>
+              <Title>Hey👋</Title>
+              <Subtitle>Welcome to Apolo!</Subtitle>
+              <Text>
+                Hello, my name is Kevin Denker, developer and creator of the
+                Apolo platform. Thank you for participating in the open beta of
+                Apolo. This project is still in the development phase, so if you
+                encounter any bugs or have suggestions for improvements, please
+                contact me. Welcome to Apolo, and enjoy the platform to the
+                fullest!
+              </Text>
               <Submit onClick={handleNext}>Next</Submit>
-            </>
+            </ModalContent>
           )}
 
           {modalStep === 2 && (
-            <>
+            <ModalContent>
               <h2>Select a Country</h2>
               <ListStyle>
                 <ul>
@@ -49,14 +66,19 @@ const Welcome = () => {
                     <li
                       key={country.code}
                       onClick={() => handleSelect(country.name)}
+                      className={
+                        selectedItem === country.name ? "selected" : ""
+                      }
                     >
                       {country.name}
                     </li>
                   ))}
                 </ul>
               </ListStyle>
-              {selectedItem && <Submit onClick={handleNext}>Next</Submit>}
-            </>
+              <Submit onClick={handleNext} disabled={!selectedItem}>
+                Next
+              </Submit>
+            </ModalContent>
           )}
 
           {modalStep === 3 && (

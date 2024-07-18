@@ -12,7 +12,7 @@ export const Content = styled.div`
 export const Container = styled.div`
   width: 45svw;
   justify-content: center;
-  background-color: rgb(0, 0, 0);
+  background-color: rgb(5, 5, 5);
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -80,7 +80,7 @@ export const Form = styled.form`
 
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: #1a0c00;
   }
 `;
 

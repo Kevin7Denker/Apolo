@@ -9,8 +9,8 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   const location = useLocation();
-
   const { state: authState } = useAuth();
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [shouldRedirect, setShouldRedirect] = useState<boolean>(false);
   const [newUser, setNewUser] = useState<boolean>(false);
@@ -31,26 +31,25 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
         setNewUser(true);
       }
 
-      if (isLoggedIn === false && location.pathname !== "/") {
-        setShouldRedirect(true);
-      } else {
-        setShouldRedirect(false);
-      }
+      setShouldRedirect(!isLoggedIn && location.pathname !== "/");
     }
   }, [authState, isLoading, location]);
 
   if (isLoading) {
     return <div>Carregando...</div>;
-  } else if (shouldRedirect) {
+  }
+
+  if (shouldRedirect) {
     return <Navigate to="/" />;
-  } else if (newUser) {
+  }
+
+  if (newUser) {
     const newPathname = "/welcome";
     window.history.pushState({}, "", newPathname);
-    element = <Welcome />;
-    return element;
-  } else {
-    return element;
+    return <Welcome />;
   }
+
+  return element;
 };
 
 export default ProtectedRoute;

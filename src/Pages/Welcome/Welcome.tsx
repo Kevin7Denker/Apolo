@@ -10,6 +10,11 @@ import {
   Subtitle,
   Title,
   Text,
+  Input,
+  InputContent,
+  InputContainer,
+  Label,
+  WelcomeSubmits,
 } from "./Styles/Index";
 
 const Welcome = () => {
@@ -82,16 +87,26 @@ const Welcome = () => {
           )}
 
           {modalStep === 3 && (
-            <div>
-              <h2>Input Details</h2>
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-              />
-              <button onClick={handleBack}>Back</button>
-              <button onClick={handleNext}>Next</button>
-            </div>
+            <ModalContent>
+              <Title>Select your ID</Title>
+              <InputContent>
+                <InputContainer>
+                  <Input
+                    type="text"
+                    placeholder="Name"
+                    required
+                    onChange={(e) => setInputValue(e.target.value)}
+                  />
+                  <Label>@example</Label>
+                </InputContainer>
+              </InputContent>
+              <WelcomeSubmits>
+                <Submit onClick={handleBack}>Back</Submit>
+                <Submit onClick={handleNext} disabled={!inputValue}>
+                  Next
+                </Submit>
+              </WelcomeSubmits>
+            </ModalContent>
           )}
 
           {modalStep === 4 && (

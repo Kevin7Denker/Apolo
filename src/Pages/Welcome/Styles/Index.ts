@@ -105,3 +105,93 @@ export const Submit = styled.button`
     transition: 0.5s;
   }
 `;
+
+export const InputContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+
+  @media (width <= 650px) {
+    width: 100%;
+  }
+`;
+
+export const InputContainer = styled.div`
+  position: relative;
+  padding: 1.2rem 0 0;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+`;
+
+export const Input = styled.input`
+  font-family: inherit;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: 0;
+
+  font-size: 0.8rem;
+  color: #fff;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.5s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ label {
+    font-size: 1rem;
+    cursor: text;
+    top: 20px;
+  }
+
+  &:focus {
+    padding-bottom: 6px;
+    border-width: 2px;
+    border-image: linear-gradient(
+      to right,
+      var(--primary-color-dark),
+      var(--primary-color-light)
+    );
+    border-image-slice: 1;
+  }
+
+  &:focus ~ label {
+    top: 0;
+    font-size: 1rem;
+    color: var(--primary-color-dark);
+  }
+
+  &:required,
+  &:invalid {
+    box-shadow: none;
+  }
+
+  @media (width <= 650px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const Label = styled.label`
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: white;
+  pointer-events: none;
+
+  @media (width <= 650px) {
+    font-size: 0.8rem;
+  }
+`;
+
+export const WelcomeSubmits = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;

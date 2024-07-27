@@ -17,6 +17,7 @@ export const Container = styled.div`
   background-color: rgb(0, 0, 0);
   width: 35svw;
   height: 100svh;
+  background-color: rgb(5, 5, 5);
   padding: 5%;
   color: white;
   justify-content: center;
@@ -123,6 +124,7 @@ export const Form = styled.form`
   flex-direction: column;
   gap: 1.5rem;
   width: 100%;
+  background-color: rgb(5, 5, 5);
 
   @media (width <= 650px) {
     align-items: center;
@@ -130,7 +132,6 @@ export const Form = styled.form`
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    background-color: black;
   }
 
   @media (width > 650px) and (width <= 900px) {
@@ -141,7 +142,6 @@ export const Form = styled.form`
     padding: 2rem;
     display: flex;
     flex-direction: column;
-    background-color: black;
   }
 `;
 
@@ -192,7 +192,7 @@ export const Options = styled.div`
   align-content: center;
   align-items: center;
   display: flex;
-  background-color: black;
+  background-color: rgb(5, 5, 5);
   transform: skew(-21deg);
   border-radius: 5px;
 
@@ -227,7 +227,7 @@ export const Credits = styled.div`
   bottom: 0;
   right: 0;
   margin: 1.5rem;
-  background-color: black;
+  background-color: rgb(5, 5, 5);
   padding: 0.5rem 1rem;
   border-radius: 5px;
 

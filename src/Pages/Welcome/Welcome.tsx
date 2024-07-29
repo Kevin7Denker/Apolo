@@ -1,29 +1,33 @@
-import { useState } from "react";
-import { countries } from "../../Utils/Data/Countries";
-import BackgroundHome from "../../Components/backgroundHome";
-import {
-  Content,
-  ModalContent,
-  ListStyle,
-  Modal,
-  Submit,
-  Subtitle,
-  Title,
-  Text,
-  Input,
-  InputContent,
-  InputContainer,
-  Label,
-  WelcomeSubmits,
-} from "./Styles/Index";
+import React, { useState } from "react";
 
-const Welcome = () => {
+import BackgroundHome from "../../Components/backgroundHome";
+import Step5 from "../../Components/WelcomeComponents/StepFive";
+import Step4 from "../../Components/WelcomeComponents/StepFour";
+import Step1 from "../../Components/WelcomeComponents/StepOne";
+import Step3 from "../../Components/WelcomeComponents/StepThree";
+import Step2 from "../../Components/WelcomeComponents/StepTwo";
+import Step6 from "../../Components/WelcomeComponents/StepSix";
+
+import { Content, Modal, ModalContent } from "./Styles/Index";
+
+const Welcome: React.FC = () => {
   const [modalStep, setModalStep] = useState(1);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [inputValue, setInputValue] = useState("");
+  const [identity, setIdentity] = useState("");
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleSelect = (item: string) => {
     setSelectedItem(item);
+  };
+
+  const handleGenreSelect = (genre: string) => {
+    setSelectedGenres((prevSelectedGenres) =>
+      prevSelectedGenres.includes(genre)
+        ? prevSelectedGenres.filter((g) => g !== genre)
+        : [...prevSelectedGenres, genre]
+    );
   };
 
   const handleNext = () => {
@@ -35,10 +39,25 @@ const Welcome = () => {
   };
 
   const handleSubmit = () => {
-    alert(`Selected Item: ${selectedItem}\nInput Value: ${inputValue}`);
+    alert(`Selected Item: ${selectedItem}\nInput Value: ${identity}`);
     setModalStep(1);
     setSelectedItem(null);
-    setInputValue("");
+    setIdentity("");
+    setSelectedGenres([]);
+    setProfileImage(null);
+    setImagePreview(null);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setProfileImage(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -46,87 +65,49 @@ const Welcome = () => {
       <BackgroundHome />
       <Content>
         <Modal>
-          {modalStep === 1 && (
-            <ModalContent>
-              <Title>Hey👋</Title>
-              <Subtitle>Welcome to Apolo!</Subtitle>
-              <Text>
-                Hello, my name is Kevin Denker, developer and creator of the
-                Apolo platform. Thank you for participating in the open beta of
-                Apolo. This project is still in the development phase, so if you
-                encounter any bugs or have suggestions for improvements, please
-                contact me. Welcome to Apolo, and enjoy the platform to the
-                fullest!
-              </Text>
-              <Submit onClick={handleNext}>Next</Submit>
-            </ModalContent>
-          )}
-
-          {modalStep === 2 && (
-            <ModalContent>
-              <h2>Select a Country</h2>
-              <ListStyle>
-                <ul>
-                  {countries.map((country) => (
-                    <li
-                      key={country.code}
-                      onClick={() => handleSelect(country.name)}
-                      className={
-                        selectedItem === country.name ? "selected" : ""
-                      }
-                    >
-                      {country.name}
-                    </li>
-                  ))}
-                </ul>
-              </ListStyle>
-              <Submit onClick={handleNext} disabled={!selectedItem}>
-                Next
-              </Submit>
-            </ModalContent>
-          )}
-
-          {modalStep === 3 && (
-            <ModalContent>
-              <Title>Select your ID</Title>
-              <InputContent>
-                <InputContainer>
-                  <Input
-                    type="text"
-                    placeholder="Name"
-                    required
-                    onChange={(e) => setInputValue(e.target.value)}
-                  />
-                  <Label>@example</Label>
-                </InputContainer>
-              </InputContent>
-              <WelcomeSubmits>
-                <Submit onClick={handleBack}>Back</Submit>
-                <Submit onClick={handleNext} disabled={!inputValue}>
-                  Next
-                </Submit>
-              </WelcomeSubmits>
-            </ModalContent>
-          )}
-
-          {modalStep === 4 && (
-            <div>
-              <h2>Review Information</h2>
-              <p>Selected Country: {selectedItem}</p>
-              <p>Input Value: {inputValue}</p>
-              <button onClick={handleBack}>Back</button>
-              <button onClick={handleNext}>Next</button>
-            </div>
-          )}
-
-          {modalStep === 5 && (
-            <div>
-              <h2>Submit</h2>
-              <p>Are you ready to submit the information?</p>
-              <button onClick={handleBack}>Back</button>
-              <button onClick={handleSubmit}>Submit</button>
-            </div>
-          )}
+          <ModalContent>
+            {modalStep === 1 && <Step1 onNext={handleNext} />}
+            {modalStep === 2 && (
+              <Step2
+                selectedItem={selectedItem}
+                onSelect={handleSelect}
+                onNext={handleNext}
+              />
+            )}
+            {modalStep === 3 && (
+              <Step3
+                identity={identity}
+                onIdentityChange={(e) => setIdentity(e.target.value)}
+                onNext={handleNext}
+                onBack={handleBack}
+              />
+            )}
+            {modalStep === 4 && (
+              <Step4
+                selectedGenres={selectedGenres}
+                onGenreSelect={handleGenreSelect}
+                onNext={handleNext}
+                onBack={handleBack}
+              />
+            )}
+            {modalStep === 5 && (
+              <Step5
+                selectedItem={selectedItem}
+                identity={identity}
+                selectedGenres={selectedGenres}
+                onBack={handleBack}
+                onNext={handleNext}
+              />
+            )}
+            {modalStep === 6 && (
+              <Step6
+                onImageChange={handleImageChange}
+                imagePreview={imagePreview}
+                onBack={handleBack}
+                onSubmit={handleSubmit}
+              />
+            )}
+          </ModalContent>
         </Modal>
       </Content>
     </>

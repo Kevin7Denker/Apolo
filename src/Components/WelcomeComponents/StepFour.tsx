@@ -6,6 +6,7 @@ import {
   Card,
   Submit,
   WelcomeSubmits,
+  ModalContent,
 } from "./Styles";
 
 interface Step4Props {
@@ -21,7 +22,7 @@ const Step4: React.FC<Step4Props> = ({
   onNext,
   onBack,
 }) => (
-  <div>
+  <ModalContent>
     <h2>Explore Genres</h2>
     <ScrollableContainer>
       <CardContainer>
@@ -44,7 +45,7 @@ const Step4: React.FC<Step4Props> = ({
         </Submit>
       </WelcomeSubmits>
     </div>
-  </div>
+  </ModalContent>
 );
 
 export default Step4;

@@ -65,49 +65,47 @@ const Welcome: React.FC = () => {
       <BackgroundHome />
       <Content>
         <Modal>
-          <ModalContent>
-            {modalStep === 1 && <Step1 onNext={handleNext} />}
-            {modalStep === 2 && (
-              <Step2
-                selectedItem={selectedItem}
-                onSelect={handleSelect}
-                onNext={handleNext}
-              />
-            )}
-            {modalStep === 3 && (
-              <Step3
-                identity={identity}
-                onIdentityChange={(e) => setIdentity(e.target.value)}
-                onNext={handleNext}
-                onBack={handleBack}
-              />
-            )}
-            {modalStep === 4 && (
-              <Step4
-                selectedGenres={selectedGenres}
-                onGenreSelect={handleGenreSelect}
-                onNext={handleNext}
-                onBack={handleBack}
-              />
-            )}
-            {modalStep === 5 && (
-              <Step5
-                selectedItem={selectedItem}
-                identity={identity}
-                selectedGenres={selectedGenres}
-                onBack={handleBack}
-                onNext={handleNext}
-              />
-            )}
-            {modalStep === 6 && (
-              <Step6
-                onImageChange={handleImageChange}
-                imagePreview={imagePreview}
-                onBack={handleBack}
-                onSubmit={handleSubmit}
-              />
-            )}
-          </ModalContent>
+          {modalStep === 1 && <Step1 onNext={handleNext} />}
+          {modalStep === 2 && (
+            <Step2
+              selectedItem={selectedItem}
+              onSelect={handleSelect}
+              onNext={handleNext}
+            />
+          )}
+          {modalStep === 3 && (
+            <Step3
+              identity={identity}
+              onIdentityChange={(e) => setIdentity(e.target.value)}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {modalStep === 4 && (
+            <Step4
+              selectedGenres={selectedGenres}
+              onGenreSelect={handleGenreSelect}
+              onNext={handleNext}
+              onBack={handleBack}
+            />
+          )}
+          {modalStep === 5 && (
+            <Step5
+              selectedItem={selectedItem}
+              identity={identity}
+              selectedGenres={selectedGenres}
+              onBack={handleBack}
+              onNext={handleNext}
+            />
+          )}
+          {modalStep === 6 && (
+            <Step6
+              onImageChange={handleImageChange}
+              imagePreview={imagePreview}
+              onBack={handleBack}
+              onSubmit={handleSubmit}
+            />
+          )}
         </Modal>
       </Content>
     </>

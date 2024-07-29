@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Submit, WelcomeSubmits } from "./Styles";
+import { Input, Submit, WelcomeSubmits, ModalContent } from "./Styles";
 
 interface Step6Props {
   onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,7 +14,7 @@ const Step6: React.FC<Step6Props> = ({
   onBack,
   onSubmit,
 }) => (
-  <div>
+  <ModalContent>
     <h2>Upload Profile Picture</h2>
     <Input type="file" accept="image/*" onChange={onImageChange} />
     {imagePreview && (
@@ -30,7 +30,7 @@ const Step6: React.FC<Step6Props> = ({
       <Submit onClick={onBack}>Back</Submit>
       <Submit onClick={onSubmit}>Submit</Submit>
     </WelcomeSubmits>
-  </div>
+  </ModalContent>
 );
 
 export default Step6;

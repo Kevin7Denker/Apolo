@@ -1,12 +1,12 @@
 import React from "react";
-import { Title, Subtitle, Submit, Text } from "./Styles";
+import { Title, Subtitle, Submit, Text, ModalContent } from "./Styles";
 
 interface Step1Props {
   onNext: () => void;
 }
 
 const Step1: React.FC<Step1Props> = ({ onNext }) => (
-  <div>
+  <ModalContent>
     <Title>Hey👋</Title>
     <Subtitle>Welcome to Apolo!</Subtitle>
     <Text>
@@ -17,7 +17,7 @@ const Step1: React.FC<Step1Props> = ({ onNext }) => (
       and enjoy the platform to the fullest!
     </Text>
     <Submit onClick={onNext}>Next</Submit>
-  </div>
+  </ModalContent>
 );
 
 export default Step1;

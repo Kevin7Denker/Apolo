@@ -1,5 +1,5 @@
 import React from "react";
-import { Submit, WelcomeSubmits, Text, Subtitle } from "./Styles";
+import { Submit, WelcomeSubmits, Text, Subtitle, ModalContent } from "./Styles";
 
 interface Step5Props {
   selectedItem: string | null;
@@ -16,7 +16,7 @@ const Step5: React.FC<Step5Props> = ({
   onBack,
   onNext,
 }) => (
-  <div>
+  <ModalContent>
     <Subtitle>Review Information</Subtitle>
     <Text>Selected Country: {selectedItem}</Text>
     <Text>Input Value: {identity}</Text>
@@ -25,7 +25,7 @@ const Step5: React.FC<Step5Props> = ({
       <Submit onClick={onBack}>Back</Submit>
       <Submit onClick={onNext}>Next</Submit>
     </WelcomeSubmits>
-  </div>
+  </ModalContent>
 );
 
 export default Step5;

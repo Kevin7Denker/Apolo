@@ -1,6 +1,6 @@
 import React from "react";
 import { countries } from "../../Utils/Data/Countries";
-import { ListStyle, Submit } from "./Styles";
+import { ListStyle, Submit, ModalContent } from "./Styles";
 
 interface Step2Props {
   selectedItem: string | null;
@@ -9,7 +9,7 @@ interface Step2Props {
 }
 
 const Step2: React.FC<Step2Props> = ({ selectedItem, onSelect, onNext }) => (
-  <div>
+  <ModalContent>
     <h2>Select a Country</h2>
     <ListStyle>
       <ul>
@@ -27,7 +27,7 @@ const Step2: React.FC<Step2Props> = ({ selectedItem, onSelect, onNext }) => (
     <Submit onClick={onNext} disabled={!selectedItem}>
       Next
     </Submit>
-  </div>
+  </ModalContent>
 );
 
 export default Step2;

@@ -6,6 +6,7 @@ import {
   Label,
   Submit,
   WelcomeSubmits,
+  ModalContent,
 } from "./Styles";
 
 interface Step3Props {
@@ -21,7 +22,7 @@ const Step3: React.FC<Step3Props> = ({
   onNext,
   onBack,
 }) => (
-  <div>
+  <ModalContent>
     <h2>Select your ID</h2>
     <InputContent>
       <InputContainer>
@@ -41,7 +42,7 @@ const Step3: React.FC<Step3Props> = ({
         Next
       </Submit>
     </WelcomeSubmits>
-  </div>
+  </ModalContent>
 );
 
 export default Step3;

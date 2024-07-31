@@ -1,31 +1,36 @@
 import React from "react";
-import { Submit, WelcomeSubmits, Text, Subtitle, ModalContent } from "./Styles";
+import { Input, Submit, WelcomeSubmits, ModalContent } from "./Styles";
 
-interface Step5Props {
-  selectedItem: string | null;
-  identity: string;
-  selectedGenres: string[];
+interface Step6Props {
+  onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  imagePreview: string | null;
   onBack: () => void;
-  onNext: () => void;
+  onSubmit: () => void;
 }
 
-const Step5: React.FC<Step5Props> = ({
-  selectedItem,
-  identity,
-  selectedGenres,
+const Step6: React.FC<Step6Props> = ({
+  onImageChange,
+  imagePreview,
   onBack,
-  onNext,
+  onSubmit,
 }) => (
   <ModalContent>
-    <Subtitle>Review Information</Subtitle>
-    <Text>Selected Country: {selectedItem}</Text>
-    <Text>Input Value: {identity}</Text>
-    <Text>Selected Genres: {selectedGenres.join(", ")}</Text>
+    <h2>Upload Profile Picture</h2>
+    <Input type="file" accept="image/*" onChange={onImageChange} />
+    {imagePreview && (
+      <div>
+        <img
+          src={imagePreview}
+          alt="Profile Preview"
+          style={{ maxWidth: "100%", maxHeight: "300px", marginTop: "20px" }}
+        />
+      </div>
+    )}
     <WelcomeSubmits>
       <Submit onClick={onBack}>Back</Submit>
-      <Submit onClick={onNext}>Next</Submit>
+      <Submit onClick={onSubmit}>Submit</Submit>
     </WelcomeSubmits>
   </ModalContent>
 );
 
-export default Step5;
+export default Step6;

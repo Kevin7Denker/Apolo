@@ -6,9 +6,8 @@ import Step4 from "../../Components/WelcomeComponents/StepFour";
 import Step1 from "../../Components/WelcomeComponents/StepOne";
 import Step3 from "../../Components/WelcomeComponents/StepThree";
 import Step2 from "../../Components/WelcomeComponents/StepTwo";
-import Step6 from "../../Components/WelcomeComponents/StepSix";
 
-import { Content, Modal, ModalContent } from "./Styles/Index";
+import { Content, Modal } from "./Styles/Index";
 
 const Welcome: React.FC = () => {
   const [modalStep, setModalStep] = useState(1);
@@ -91,15 +90,6 @@ const Welcome: React.FC = () => {
           )}
           {modalStep === 5 && (
             <Step5
-              selectedItem={selectedItem}
-              identity={identity}
-              selectedGenres={selectedGenres}
-              onBack={handleBack}
-              onNext={handleNext}
-            />
-          )}
-          {modalStep === 6 && (
-            <Step6
               onImageChange={handleImageChange}
               imagePreview={imagePreview}
               onBack={handleBack}

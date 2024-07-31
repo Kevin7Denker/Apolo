@@ -23,11 +23,11 @@ export const ModalContent = styled.div`
     display: flex;
     flex-direction: column;
     gap: 15px;
-    max-width: 70svw;
+    width: 70svw;
   }
 
   @media (width > 650px) and (width <= 900px) {
-    max-width: 50svw;
+    width: 50svw;
   }
 `;
 
@@ -211,6 +211,14 @@ export const CardContainer = styled.div`
     transition: 0.5s;
     border: none;
   }
+
+  @media (width <= 650px) {
+    grid-template-columns: auto auto;
+  }
+
+  @media (width > 650px) and (width <= 900px) {
+    width: 50svw;
+  }
 `;
 
 export const Card = styled.div`
@@ -220,12 +228,17 @@ export const Card = styled.div`
   padding: 1rem;
   border-radius: 10px;
   background-color: rgb(35, 35, 35);
+  cursor: pointer;
   transition: 0.5s;
 `;
 
 export const ScrollableContainer = styled.div`
   max-height: 35svh;
   overflow-y: auto;
+
+  @media (width > 650px) and (width <= 900px) {
+    max-height: 25svh;
+  }
 `;
 
 export const image = styled.div`

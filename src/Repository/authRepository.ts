@@ -2,18 +2,23 @@ import axios from "axios";
 import authValidation from "../services/validations/authValidation";
 
 class AuthRepository {
-  authValidation = new authValidation();
+  private urlSignIn;
+  private urlSignUp;
+
+  private authValidation = new authValidation();
+
+  constructor() {
+    this.urlSignIn = "https://apolo-api.onrender.com/auth/signin";
+    this.urlSignUp = "https://apolo-api.onrender.com/auth/signup";
+  }
 
   async login(email: string, password: string) {
     try {
       await this.authValidation.validateLogin({ email, password });
-      const data = await axios.post(
-        "https://apolo-api.onrender.com/auth/signin",
-        {
-          email,
-          password,
-        }
-      );
+      const data = await axios.post(this.urlSignIn, {
+        email,
+        password,
+      });
 
       return data;
     } catch (error) {
@@ -41,7 +46,7 @@ class AuthRepository {
         password,
         confirmPassword,
       });
-      await axios.post("https://apolo-api.onrender.com/auth/signup", {
+      await axios.post(this.urlSignUp, {
         name,
         surname,
         email,

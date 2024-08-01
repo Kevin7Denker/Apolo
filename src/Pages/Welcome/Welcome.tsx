@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import BackgroundHome from "../../Components/backgroundHome";
 import Step5 from "../../Components/WelcomeComponents/StepFive";
 import Step4 from "../../Components/WelcomeComponents/StepFour";
@@ -7,8 +6,8 @@ import Step1 from "../../Components/WelcomeComponents/StepOne";
 import Step3 from "../../Components/WelcomeComponents/StepThree";
 import Step2 from "../../Components/WelcomeComponents/StepTwo";
 
-import { Content, Modal } from "./Styles/Index";
 import UserRepository from "../../Repository/userRepository";
+import { Content, ErrorMessage, Modal } from "./Styles/Index";
 
 const Welcome = () => {
   const [modalStep, setModalStep] = useState(1);
@@ -17,11 +16,13 @@ const Welcome = () => {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const userRepository = new UserRepository();
 
   const handleSelect = (item: string) => {
     setSelectedItem(item);
+    setErrorMessage(null);
   };
 
   const handleGenreSelect = (genre: string) => {
@@ -30,26 +31,29 @@ const Welcome = () => {
         ? prevSelectedGenres.filter((g) => g !== genre)
         : [...prevSelectedGenres, genre]
     );
+    setErrorMessage(null);
   };
 
   const handleNext = async () => {
     if (modalStep === 3) {
       try {
-        const response = await userRepository.findIdentity(identity).then();
-
+        const response = await userRepository.findIdentity("@" + identity);
         if (response?.status === 200) {
           setModalStep((prevStep) => prevStep + 1);
+          setErrorMessage(null);
         }
       } catch (error) {
-        alert("Error:" + error);
+        setErrorMessage("Identity invalid");
       }
     } else {
       setModalStep((prevStep) => prevStep + 1);
+      setErrorMessage(null);
     }
   };
 
   const handleBack = () => {
     setModalStep((prevStep) => prevStep - 1);
+    setErrorMessage(null);
   };
 
   const handleSubmit = () => {
@@ -60,6 +64,7 @@ const Welcome = () => {
     setSelectedGenres([]);
     setProfileImage(null);
     setImagePreview(null);
+    setErrorMessage(null);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -112,6 +117,7 @@ const Welcome = () => {
             />
           )}
         </Modal>
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </Content>
     </>
   );

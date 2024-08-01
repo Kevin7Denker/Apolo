@@ -33,7 +33,7 @@ const Step3: React.FC<Step3Props> = ({
           value={identity}
           onChange={onIdentityChange}
         />
-        <Label>@example</Label>
+        <Label>Identity</Label>
       </InputContainer>
     </InputContent>
     <WelcomeSubmits>

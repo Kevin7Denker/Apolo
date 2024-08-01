@@ -8,14 +8,17 @@ import Step3 from "../../Components/WelcomeComponents/StepThree";
 import Step2 from "../../Components/WelcomeComponents/StepTwo";
 
 import { Content, Modal } from "./Styles/Index";
+import UserRepository from "../../Repository/userRepository";
 
-const Welcome: React.FC = () => {
+const Welcome = () => {
   const [modalStep, setModalStep] = useState(1);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
   const [identity, setIdentity] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [profileImage, setProfileImage] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+
+  const userRepository = new UserRepository();
 
   const handleSelect = (item: string) => {
     setSelectedItem(item);
@@ -29,8 +32,20 @@ const Welcome: React.FC = () => {
     );
   };
 
-  const handleNext = () => {
-    setModalStep((prevStep) => prevStep + 1);
+  const handleNext = async () => {
+    if (modalStep === 3) {
+      try {
+        const response = await userRepository.findIdentity(identity).then();
+
+        if (response?.status === 200) {
+          setModalStep((prevStep) => prevStep + 1);
+        }
+      } catch (error) {
+        alert("Error:" + error);
+      }
+    } else {
+      setModalStep((prevStep) => prevStep + 1);
+    }
   };
 
   const handleBack = () => {

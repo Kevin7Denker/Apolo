@@ -15,12 +15,21 @@ class AuthRepository {
   async login(email: string, password: string) {
     try {
       await this.authValidation.validateLogin({ email, password });
-      const data = await axios.post(this.urlSignIn, {
+
+      const res = await axios.post(this.urlSignIn, {
         email,
         password,
       });
 
-      return data;
+      if (res.data.items[0].user.validation.email) {
+        return res;
+      }
+
+      if (!res.data.items[0].user.validation.email) {
+        return false;
+      }
+
+      return null;
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error:", error);

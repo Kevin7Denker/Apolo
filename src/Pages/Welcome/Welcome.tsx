@@ -7,7 +7,8 @@ import Step3 from "../../Components/WelcomeComponents/StepThree";
 import Step2 from "../../Components/WelcomeComponents/StepTwo";
 
 import UserRepository from "../../Repository/userRepository";
-import { Content, ErrorMessage, Modal } from "./Styles/Index";
+import { Content, Modal } from "./Styles/Index";
+import { ErrorMessage } from "../../Styles/Styles";
 
 const Welcome = () => {
   const [modalStep, setModalStep] = useState(1);

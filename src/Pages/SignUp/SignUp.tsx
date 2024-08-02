@@ -20,6 +20,7 @@ import {
 import { InputContainer } from "../SignIn/Styles/Index";
 import AuthRepository from "../../Repository/authRepository";
 import { useState } from "react";
+import { ErrorMessage, SuccessMessage } from "../../Styles/Styles";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -31,6 +32,9 @@ const SignUp = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -44,23 +48,28 @@ const SignUp = () => {
         confirmPassword
       );
 
-      console.log(res);
-
       if (res) {
-        alert("User created successfully!");
+        console.log(res);
+        setSuccessMessage("User created successfully");
 
-        setName("");
-        setSurname("");
-        setPhone("");
-        setEmail("");
-        setPassword("");
-        setConfirmPassword("");
+        resetForm();
 
-        navigate("/");
+        /*setTimeout(() => {
+          navigate("/");
+        }, 3000);*/
       }
     } catch (error) {
-      console.error(error);
+      setErrorMessage("Error creating user");
     }
+  }
+
+  function resetForm() {
+    setName("");
+    setSurname("");
+    setPhone("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   }
 
   return (
@@ -158,6 +167,8 @@ const SignUp = () => {
           </RegisterContainer>
         </Container>
       </Content>
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
+      {successMessage && <SuccessMessage>{successMessage}</SuccessMessage>}
     </>
   );
 };

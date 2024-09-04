@@ -72,6 +72,31 @@ class AuthRepository {
       }
     }
   }
+
+  async completeWelcome(
+    email: string,
+    image: File | null,
+    genres: string[] | null,
+    country: string | null,
+    code: string | null,
+    identity: string | null
+  ) {
+    const res = await axios.post(
+      "https://apolo-api.onrender.com/auth/complete-welcome",
+      {
+        email,
+        image,
+        genres,
+        country,
+        code,
+        identity,
+      }
+    );
+
+    console.log(res);
+
+    return res;
+  }
 }
 
 export default AuthRepository;

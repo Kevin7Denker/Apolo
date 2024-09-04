@@ -52,6 +52,8 @@ class AuthValidation {
       throw error;
     }
   }
+
+  async validateWelcome() {}
 }
 
 export default AuthValidation;

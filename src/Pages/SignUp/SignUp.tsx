@@ -54,9 +54,9 @@ const SignUp = () => {
 
         resetForm();
 
-        /*setTimeout(() => {
+        setTimeout(() => {
           navigate("/");
-        }, 3000);*/
+        }, 2500);
       }
     } catch (error) {
       setErrorMessage("Error creating user");

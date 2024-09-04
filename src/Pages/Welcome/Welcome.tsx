@@ -9,10 +9,13 @@ import Step2 from "../../Components/WelcomeComponents/StepTwo";
 import UserRepository from "../../Repository/userRepository";
 import { Content, Modal } from "./Styles/Index";
 import { ErrorMessage } from "../../Styles/Styles";
+import { countries } from "../../Utils/Data/Countries";
+import AuthRepository from "../../Repository/authRepository";
 
 const Welcome = () => {
   const [modalStep, setModalStep] = useState(1);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
+  const [counctryCode, setCountryCode] = useState<string | null>(null);
   const [identity, setIdentity] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [profileImage, setProfileImage] = useState<File | null>(null);
@@ -20,10 +23,34 @@ const Welcome = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const userRepository = new UserRepository();
+  const authRepository = new AuthRepository();
+
+  const handleSubmit = () => {
+    authRepository.completeWelcome(
+      "denkerdkevin@gmail.com",
+      profileImage,
+      selectedGenres,
+      selectedItem,
+      counctryCode,
+      identity
+    );
+
+    setModalStep(1);
+    setSelectedItem(null);
+    setCountryCode(null);
+    setIdentity("");
+    setSelectedGenres([]);
+    setProfileImage(null);
+    setImagePreview(null);
+    setErrorMessage(null);
+  };
 
   const handleSelect = (item: string) => {
     setSelectedItem(item);
     setErrorMessage(null);
+
+    const selectedCountry = countries.find((country) => country.name === item);
+    setCountryCode(selectedCountry ? selectedCountry.code : null);
   };
 
   const handleGenreSelect = (genre: string) => {
@@ -54,17 +81,6 @@ const Welcome = () => {
 
   const handleBack = () => {
     setModalStep((prevStep) => prevStep - 1);
-    setErrorMessage(null);
-  };
-
-  const handleSubmit = () => {
-    alert(`Selected Item: ${selectedItem}\nInput Value: ${identity}`);
-    setModalStep(1);
-    setSelectedItem(null);
-    setIdentity("");
-    setSelectedGenres([]);
-    setProfileImage(null);
-    setImagePreview(null);
     setErrorMessage(null);
   };
 

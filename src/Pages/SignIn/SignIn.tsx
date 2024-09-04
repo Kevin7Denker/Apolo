@@ -24,6 +24,7 @@ import AuthRepository from "../../Repository/authRepository";
 
 import { handleResponse } from "../../Utils/Auth/SignInUtils";
 import { useAuth } from "../../Hooks/useAuth";
+import { ErrorMessage } from "../../Styles/Styles";
 
 const SignIn = () => {
   const authrepository = new AuthRepository();
@@ -34,13 +35,21 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await authrepository.login(email, password);
+
       if (res) {
         handleResponse(res, dispatch, navigate);
       }
+
+      if (res === false) {
+        setErrorMessage("Please, validate your email");
+      }
+
       resetForm();
     } catch (error) {
       console.error(error);
@@ -107,6 +116,7 @@ const SignIn = () => {
           <p>Copyright © 2024 Kevin Denker. All rights reserved.</p>
         </Credits>
       </Content>
+      {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
     </>
   );
 };

@@ -2,20 +2,34 @@ import axios from "axios";
 import authValidation from "../services/validations/authValidation";
 
 class AuthRepository {
-  authValidation = new authValidation();
+  private urlSignIn;
+  private urlSignUp;
+
+  private authValidation = new authValidation();
+
+  constructor() {
+    this.urlSignIn = "https://apolo-api.onrender.com/auth/signin";
+    this.urlSignUp = "https://apolo-api.onrender.com/auth/signup";
+  }
 
   async login(email: string, password: string) {
     try {
       await this.authValidation.validateLogin({ email, password });
-      const data = await axios.post(
-        "https://apolo-api.onrender.com/auth/signin",
-        {
-          email,
-          password,
-        }
-      );
 
-      return data;
+      const res = await axios.post(this.urlSignIn, {
+        email,
+        password,
+      });
+
+      if (res.data.items[0].user.validation.email) {
+        return res;
+      }
+
+      if (!res.data.items[0].user.validation.email) {
+        return false;
+      }
+
+      return null;
     } catch (error) {
       if (error instanceof Error) {
         console.error("Error:", error);
@@ -41,7 +55,7 @@ class AuthRepository {
         password,
         confirmPassword,
       });
-      await axios.post("https://apolo-api.onrender.com/auth/signup", {
+      await axios.post(this.urlSignUp, {
         name,
         surname,
         email,
@@ -57,6 +71,31 @@ class AuthRepository {
         throw error;
       }
     }
+  }
+
+  async completeWelcome(
+    email: string,
+    image: File | null,
+    genres: string[] | null,
+    country: string | null,
+    code: string | null,
+    identity: string | null
+  ) {
+    const res = await axios.post(
+      "https://apolo-api.onrender.com/auth/complete-welcome",
+      {
+        email,
+        image,
+        genres,
+        country,
+        code,
+        identity,
+      }
+    );
+
+    console.log(res);
+
+    return res;
   }
 }
 

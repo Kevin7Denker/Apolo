@@ -1,10 +1,10 @@
 import axios from "axios";
-import UserValidation from "../services/validations/userValidations";
+//import UserValidation from "../services/validations/userValidations";
 
 class UserRepository {
   private urlIdentity;
 
-  private userValidation = new UserValidation();
+  //private userValidation = new UserValidation();
 
   constructor() {
     this.urlIdentity = `https://apolo-api.onrender.com/user/find-identity/`;

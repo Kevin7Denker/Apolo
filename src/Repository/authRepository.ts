@@ -1,15 +1,21 @@
 import axios from "axios";
 import authValidation from "../services/validations/authValidation";
+import { COMPLETE_WELCOME, RESEND_EMAIL, SIGNIN, SIGNUP } from "../Urls";
+import { GetUser } from "../Hooks/Providers/AuthProvider";
 
 class AuthRepository {
   private urlSignIn;
   private urlSignUp;
+  private urlCompleteWelcome;
+  private urlResendEmail;
 
   private authValidation = new authValidation();
 
   constructor() {
-    this.urlSignIn = "https://apolo-api.onrender.com/auth/signin";
-    this.urlSignUp = "https://apolo-api.onrender.com/auth/signup";
+    this.urlSignIn = SIGNIN;
+    this.urlSignUp = SIGNUP;
+    this.urlCompleteWelcome = COMPLETE_WELCOME;
+    this.urlResendEmail = RESEND_EMAIL;
   }
 
   async login(email: string, password: string) {
@@ -74,28 +80,40 @@ class AuthRepository {
   }
 
   async completeWelcome(
-    email: string,
     image: File | null,
     genres: string[] | null,
     country: string | null,
     code: string | null,
     identity: string | null
   ) {
-    const res = await axios.post(
-      "https://apolo-api.onrender.com/auth/complete-welcome",
-      {
-        email,
-        image,
-        genres,
-        country,
-        code,
-        identity,
-      }
-    );
+    const user = GetUser();
+    const email = user.profile.email;
 
-    console.log(res);
+    const res = await axios.post(this.urlCompleteWelcome, {
+      email,
+      image,
+      genres,
+      country,
+      code,
+      identity,
+    });
 
     return res;
+  }
+
+  async resendEmail(token: string) {
+    try {
+      const res = await axios.post(this.urlResendEmail, {
+        token,
+      });
+
+      return res;
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error("Error:", error);
+        throw error;
+      }
+    }
   }
 }
 

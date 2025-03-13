@@ -80,7 +80,7 @@ export const Form = styled.form`
 
     display: flex;
     flex-direction: column;
-    background-color: #1a0c00;
+    background-color: rgb(5, 5, 5);
   }
 `;
 

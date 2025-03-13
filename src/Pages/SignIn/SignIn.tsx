@@ -25,6 +25,8 @@ import AuthRepository from "../../Repository/authRepository";
 import { handleResponse } from "../../Utils/Auth/SignInUtils";
 import { useAuth } from "../../Hooks/useAuth";
 import { ErrorMessage } from "../../Styles/Styles";
+import { useEffect } from "react";
+import { AxiosError } from "axios";
 
 const SignIn = () => {
   const authrepository = new AuthRepository();
@@ -37,22 +39,49 @@ const SignIn = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
+  const resendEmail = async (token: unknown) => {
+    try {
+      const res = await authrepository.resendEmail(token as string);
+
+      if (res) {
+        setErrorMessage("Email sent successfully");
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const res = await authrepository.login(email, password);
+
+      console.log(res);
 
       if (res) {
         handleResponse(res, dispatch, navigate);
       }
 
       if (res === false) {
+        resendEmail(res);
         setErrorMessage("Please, validate your email");
       }
 
       resetForm();
     } catch (error) {
-      console.error(error);
+      if (error instanceof AxiosError) {
+        setErrorMessage(error.request.response.split('"')[5]);
+      }
     }
   };
 

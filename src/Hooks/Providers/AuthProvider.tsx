@@ -55,6 +55,11 @@ const authReducer = (state: State, action: Action): State => {
   }
 };
 
+export const GetUser = () => {
+  const user = Cookies.get("user");
+  return JSON.parse(user || "{}");
+};
+
 export const AuthProvider = ({ children }: ProviderProps) => {
   const [state, dispatch] = useReducer(authReducer, initialState);
 

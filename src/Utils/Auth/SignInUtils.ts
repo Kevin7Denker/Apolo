@@ -29,3 +29,7 @@ export const handleResponse = (
     navigate("/home");
   }
 };
+
+export const handleError = (error: Error): void => {
+  console.error("Error:", error);
+};

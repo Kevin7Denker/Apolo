@@ -142,6 +142,16 @@ export const Input = styled.input`
   background: transparent;
   transition: border-color 0.5s;
 
+  &::file-selector-button {
+    display: none;
+  }
+
+  &::file-selector-text {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+  }
+
   &::placeholder {
     color: transparent;
   }
@@ -245,4 +255,22 @@ export const image = styled.div`
   max-width: 100%;
   max-height: 300px;
   margin-top: 20px;
+`;
+
+export const ImageContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ImagePreview = styled.div`
+  width: 8rem;
+  height: 8rem;
+
+  img {
+    border-radius: 100rem;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 `;

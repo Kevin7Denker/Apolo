@@ -49,7 +49,6 @@ const SignUp = () => {
       );
 
       if (res) {
-        console.log(res);
         setSuccessMessage("User created successfully");
 
         resetForm();

@@ -6,32 +6,44 @@ import Step1 from "../../Components/WelcomeComponents/StepOne";
 import Step3 from "../../Components/WelcomeComponents/StepThree";
 import Step2 from "../../Components/WelcomeComponents/StepTwo";
 
+import AuthRepository from "../../Repository/authRepository";
+import random from "../../Assets/Common/random.jpg";
+
 import UserRepository from "../../Repository/userRepository";
+
 import { Content, Modal } from "./Styles/Index";
 import { ErrorMessage } from "../../Styles/Styles";
 import { countries } from "../../Utils/Data/Countries";
-import AuthRepository from "../../Repository/authRepository";
 
 const Welcome = () => {
   const [modalStep, setModalStep] = useState(1);
   const [selectedItem, setSelectedItem] = useState<string | null>(null);
-  const [counctryCode, setCountryCode] = useState<string | null>(null);
+  const [countryCode, setCountryCode] = useState<string | null>(null);
   const [identity, setIdentity] = useState("");
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
   const [profileImage, setProfileImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(random);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const userRepository = new UserRepository();
   const authRepository = new AuthRepository();
 
   const handleSubmit = () => {
+    if (selectedGenres.length === 0) {
+      setErrorMessage("Select at least one genre");
+      return;
+    }
+
+    if (!profileImage) {
+      setErrorMessage("Select a profile image");
+      return;
+    }
+
     authRepository.completeWelcome(
-      "denkerdkevin@gmail.com",
       profileImage,
       selectedGenres,
       selectedItem,
-      counctryCode,
+      countryCode,
       identity
     );
 
@@ -85,14 +97,21 @@ const Welcome = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setProfileImage(file);
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+    setImagePreview(null);
+    try {
+      if (e.target.files && e.target.files[0]) {
+        const file = e.target.files[0];
+        setProfileImage(file);
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setImagePreview(reader.result as string);
+        };
+
+        console.log(file);
+        reader.readAsDataURL(file);
+      }
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
 

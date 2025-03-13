@@ -31,6 +31,10 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
         setNewUser(true);
       }
 
+      if (authState.user && authState.user.profile.dateCreation != null) {
+        setNewUser(false);
+      }
+
       setShouldRedirect(!isLoggedIn && location.pathname !== "/");
     }
   }, [authState, isLoading, location]);

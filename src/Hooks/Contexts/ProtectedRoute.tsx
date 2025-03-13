@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { useAuth } from "../useAuth";
 import Welcome from "../../Pages/Welcome/Welcome";
+import Loading from "../../Pages/Loading/Loading";
 
 interface ProtectedRouteProps {
   element: React.ReactElement;
@@ -40,7 +41,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   }, [authState, isLoading, location]);
 
   if (isLoading) {
-    return <div>Carregando...</div>;
+    return <Loading />;
   }
 
   if (shouldRedirect) {

@@ -8,8 +8,8 @@ class AuthRepository {
   private authValidation = new authValidation();
 
   constructor() {
-    this.urlSignIn = "https://apolo-api.onrender.com/auth/signin";
-    this.urlSignUp = "https://apolo-api.onrender.com/auth/signup";
+    this.urlSignIn = "https://apolo-api.kvdenker.com/auth/signin";
+    this.urlSignUp = "https://apolo-api.kvdenker.com/auth/signup";
   }
 
   async login(email: string, password: string) {

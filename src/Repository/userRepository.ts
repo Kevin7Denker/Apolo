@@ -7,7 +7,7 @@ class UserRepository {
   //private userValidation = new UserValidation();
 
   constructor() {
-    this.urlIdentity = `https://apolo-api.onrender.com/user/find-identity/`;
+    this.urlIdentity = `https://apolo-api.kvdenker.com/user/find-identity/`;
   }
 
   async findIdentity(id: string) {
